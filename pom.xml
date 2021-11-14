@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>eu.vargapeter</groupId>
+	<artifactId>financialstatistics</artifactId>
+	<version>1.0-RELEASE</version>
+	<name>financialstatistics</name>
+	<description>Financial statistics</description>
+
+	<properties>
+		<java.version>11</java.version>
+		<spring.version>2.3.9.RELEASE</spring.version>
+		<keycloak-adapter-bom.version>11.0.2</keycloak-adapter-bom.version>
+		<apache.poi.version>4.1.2</apache.poi.version>
+		<mysql.version>8.0.23</mysql.version>
+		<lombok.version>1.18.12</lombok.version>
+		<bootstrap.version>4.6.0</bootstrap.version>
+		<jquery.version>3.5.1</jquery.version>
+		<chartjs.version>2.9.4</chartjs.version>
+		<junit.version>4.12</junit.version>
+		<validator.version>6.1.0.Final</validator.version>
+		<h2.version>1.4.199</h2.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- H2 database -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+			<version>${h2.version}</version>
+		</dependency>
+
+		<!-- Excel read -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- MySql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
+
+		<!-- Validator -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${validator.version}</version>
+		</dependency>
+
+		<!-- Keycloak -->
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- Bootstrap -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>${bootstrap.version}</version>
+		</dependency>
+
+		<!-- jquery -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>${jquery.version}</version>
+		</dependency>
+
+		<!-- Chart.js -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>chartjs</artifactId>
+			<version>${chartjs.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<layers>
+						<enabled>true</enabled>
+					</layers>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- Keycloak -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.keycloak.bom</groupId>
+				<artifactId>keycloak-adapter-bom</artifactId>
+				<version>${keycloak-adapter-bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

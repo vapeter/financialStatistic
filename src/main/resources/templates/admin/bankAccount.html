@@ -1,0 +1,38 @@
+<div class="container" th:fragment="bankAccount">
+    <hr>
+    <div>
+        <h4 class="d-inline" th:text="#{admin.bankAccounts}"></h4>
+        <button class="btn btn-primary d-inline float-end" data-toggle="modal" data-target="#newBankAccountModal" type="button"
+            th:text="#{admin.newBankAccount}">
+        </button>
+    </div>
+
+    <table class="table table-borderless">
+        <tr>
+            <th scope="col" th:text="#{admin.bankAccountNumber}"></th>
+            <th scope="col" th:text="#{admin.amount}"></th>
+            <th scope="col" th:text="#{admin.bankAccountType}"></th>
+            <th scope="col" th:text="#{admin.bank}"></th>
+        </tr>
+        <th:block th:each="bankAccount : ${bankAccountList}">
+            <tr>
+                <td th:text="${bankAccount.BankAccountNumber}"></td>
+                <td th:text="${bankAccount.amount}"></td>
+                <td th:text="#{${'enum.' + bankAccount.bankAccountType}}"></td>
+                <td th:text="${bankAccount.bank.bankName}"></td>
+                <td>
+                    <button class="btn btn-info"
+                            data-toggle="modal"
+                            data-target="#editBankAccountModal"
+                            type="button" th:attrappend="data-target=${bankAccount.bankAccountId}">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </td>
+            </tr>
+            <!--            Edit bankAccount modal-->
+            <div th:replace="admin/editBankAccount :: editBankAccount">...</div>
+        </th:block>
+    </table>
+    <!--new bankaccount modal-->
+    <div th:replace="admin/newBankAccount :: newBankAccount">...</div>
+</div>

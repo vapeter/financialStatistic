@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />-->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+    <link th:rel="stylesheet" th:href="@{/css/mdb.min.css}">
+    <script th:src="@{/js/mdb.min.js}" th:inline="javascript"></script>
+
+    <link th:rel="stylesheet" th:href="@{/icons/bootstrap-icons.css}">
+
+</head>
+<body>
+
+<!--menu-->
+<div th:replace="menu :: menu">...</div>
+
+<div class="container">
+    <div class="row">
+        <h3>Application has encountered an error. Please contact support on</h3>
+        <p th:text="${exception}"></p>
+        <p th:text="${url}"></p>
+    </div>
+</div>
+
+</body>
+<!--<div th:replace="footer :: footer">...</div>-->
+</html>

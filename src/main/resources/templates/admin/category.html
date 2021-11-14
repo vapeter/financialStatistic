@@ -1,0 +1,42 @@
+<div class="col-6 d-inline float-end" th:fragment="category">
+    <div>
+        <h4 class="d-inline" th:text="#{admin.categories}"></h4>
+        <button class="btn btn-primary d-inline float-end" data-toggle="modal" data-target="#newCategoryModal"
+                type="button"
+                th:text="#{admin.newCategory}">
+        </button>
+    </div>
+
+
+    <table class="table table-borderless">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col" th:text="#{admin.category}"></th>
+        </tr>
+        <th:block th:each="transactionCategory : ${transactionCategoryList}">
+            <tr>
+                <td th:text="${transactionCategory.transactionCategoryId}"></td>
+                <td th:text="${transactionCategory.transactionCategoryName}"></td>
+                <td>
+                    <button class="btn btn-info"
+                            data-toggle="modal"
+                            data-target="#editCategoryModal"
+                            type="button" th:attrappend="data-target=${transactionCategory.transactionCategoryId}">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <form class="form-inline"
+                          th:action="@{'/admin/deleteTransactionCategory/' + ${transactionCategory.transactionCategoryId}}"
+                          method="post">
+                        <button class="btn btn-danger" type="submit">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+                <!--                Edit transaction Category Modal-->
+                <div th:replace="admin/editCategory :: editCategory">...</div>
+            </tr>
+        </th:block>
+    </table>
+    <!--New Transaction Category Modal-->
+    <div th:replace="admin/newCategory :: newCategory">...</div>
+</div>

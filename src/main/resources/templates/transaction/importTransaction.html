@@ -1,0 +1,41 @@
+<!--    Import new transaction modal-->
+<div id="importTransactionModal" role="dialog" aria-hidden="true" class="modal fade" th:fragment="importTransaction">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle" th:text="#{importTransaction.header}"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="#" th:action="@{/importNewTransaction}" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div>
+                        <label for="bankAccount" th:text="#{editTransaction.bankaccount}"></label>
+                        <select id="bankAccount" class="form-control" name="bankAccount">
+                            <option th:each="bankAccount : ${bankAccountList}"
+                                    th:value="${bankAccount.bankAccountId}"
+                                    th:text="${bankAccount.bankAccountNumber}">
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="bankImportType" th:text="#{admin.bank}"></label>
+                        <select id="bankImportType" class="form-control" name="bankImportType">
+                            <option value="UniCredit">UniCredit</option>
+                            <option value="Erste">Erste</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <div class="input-group">
+                        <input type="file" name="file" accept=".xlsx, .xls" class="form-control" id="inputGroupFile04"
+                               aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04"
+                                th:text="#{importTransaction.submit}">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

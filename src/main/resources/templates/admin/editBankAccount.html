@@ -1,0 +1,54 @@
+<!--    Edit bankaccount modal-->
+<div id="editBankAccountModal" role="dialog" aria-hidden="true" class="modal fade" th:fragment="editBankAccount"
+     th:attrappend="id=${bankAccount.bankAccountId}">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle" th:text="#{editBankAccount.header}"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="#" th:action="@{/admin/saveNewBankAccount}" method="post" class="form-inline">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="bankAccountId" th:value="*{bankAccount.bankAccountId}">
+                        <div>
+                            <label for="bankAccountNumber" th:text="#{editBankAccount.bankAccountNumber}"></label>
+                            <input id="bankAccountNumber" type="text" name="bankAccountNumber" class="form-control"
+                                   th:value="*{bankAccount.bankAccountNumber}"/>
+                        </div>
+                        <div>
+                            <label for="amount" th:text="#{editBankAccount.amount}"></label>
+                            <input id="amount" type="text" name="amount" class="form-control"
+                                   th:value="*{bankAccount.amount}"/>
+                        </div>
+                        <div>
+                            <label for="bankAccountType" th:text="#{editBankAccount.type}"></label>
+                            <select id="bankAccountType" class="form-control" name="bankAccountType">
+                                <option th:each="bankAccountType : ${T(eu.vargapeter.financialstatistics.model.BankAccountType).values()}"
+                                        th:value="${bankAccountType}"
+                                        th:selected="${bankAccountType == bankAccount.bankAccountType}"
+                                        th:text="#{${'enum.' + bankAccountType}}">
+                                </option>
+                            </select>
+                        </div>
+                        <label for="bank" th:text="#{editBankAccount.bank}"></label>
+                        <select id="bank" class="form-control" name="bankId">
+                            <option th:each="bank : ${bankList}"
+                                    th:selected="${bank == bankAccount.bank}"
+                                    th:value="${bank.bankId}"
+                                    th:text="${bank.bankName}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            th:text="#{button.cancel}"></button>
+                    <button type="submit" class="btn btn-primary" th:text="#{button.submit}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!--    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />-->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+    <link th:rel="stylesheet" th:href="@{/css/mdb.min.css}">
+    <script th:src="@{/js/mdb.min.js}" th:inline="javascript"></script>
+
+    <link th:rel="stylesheet" th:href="@{/icons/bootstrap-icons.css}">
+
+</head>
+<body>
+
+<!--menu-->
+    <div th:replace="menu :: menu">...</div>
+
+    <div class="container">
+        <div class="row">
+            <!--Bank list and administration-->
+            <div th:replace="admin/bank :: bank">...</div>
+            <!--Transaction category list and administration-->
+            <div th:replace="admin/category :: category">...</div>
+        </div>
+    </div>
+
+
+
+
+<!--Account list and administration-->
+    <div th:replace="admin/bankAccount :: bankAccount">...</div>
+
+
+
+</body>
+<!--<div th:replace="footer :: footer">...</div>-->
+</html>

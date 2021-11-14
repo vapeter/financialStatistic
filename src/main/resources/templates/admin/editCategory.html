@@ -1,0 +1,33 @@
+<!--                Edit category modal     -->
+<div id="editCategoryModal" role="dialog" aria-hidden="true" class="modal fade"
+     th:attrappend="id=${transactionCategory.transactionCategoryId}" th:fragment="editCategory">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" th:text="#{categoryEdit.header}"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="#" th:action="@{/admin/saveNewTransactionCategory}" method="post" class="form-inline">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="transactionCategoryId"
+                               th:value="*{transactionCategory.transactionCategoryId}">
+                        <div class="col-12">
+                            <label for="transactionCategoryName" th:text="#{categoryEdit.category}"></label>
+                            <input id="transactionCategoryName" name="transactionCategoryName" type="text"
+                                   class="form-control" th:value="*{transactionCategory.transactionCategoryName}" required/>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-12">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                th:text="#{button.cancel}"></button>
+                        <button type="submit" class="btn btn-primary" th:text="#{button.submit}"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<!--    Save new transaction modal-->
+<div id="newTransactionModal" role="dialog" aria-hidden="true" class="modal fade" th:fragment="newTransaction">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle" th:text="#{newTransaction.header}"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="#" th:action="@{/saveNewTransaction}" th:object="${newTransaction}" method="post" class="form-inline">
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div>
+                            <label for="bankAccount" th:text="#{editTransaction.bankaccount}"></label>
+                            <select id="bankAccount" class="form-control" name="bankAccount">
+                                <option th:each="bankAccount : ${bankAccountList}"
+                                        th:value="${bankAccount.bankAccountId}"
+                                        th:text="${bankAccount.bankAccountNumber}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="transactionDate" th:text="#{transaction.date}"></label>
+                            <input id="transactionDate" type="text" th:field="*{transactionDate}" class="form-control" th:value="*{transactionDate}"
+                                   th:attr="placeholder=#{newTransactionDate.placeholder}"
+                                   pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+                                   required/>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="amount" th:text="#{transaction.amount}"></label>
+                            <input id="amount" type="text" th:field="*{amount}" class="form-control" th:value="*{amount}" required/>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="currency" th:text="#{editTransaction.currency}"></label>
+                            <input id="currency" type="text" th:field="*{currency}" class="form-control" th:value="*{currency}" required/>
+                        </div>
+                        <div class="col-4">
+                            <label for="announcement" th:text="#{transaction.announcement}"></label>
+                            <input id="announcement" type="text" th:field="*{announcement}" class="form-control" th:value="*{announcement}" required/>
+                        </div>
+                        <div class="col-4">
+                            <label for="partnerName" th:text="#{transaction.partner.name}"></label>
+                            <input id="partnerName" type="text" th:field="*{partnerName}" class="form-control" th:value="*{partnerName}" required/>
+                        </div>
+                        <div>
+                            <label for="transactionCategory" th:text="#{categoryEdit.category}"></label>
+                            <select id="transactionCategory" class="form-control" name="transactionCategory">
+                                <option th:each="transactionCategory : ${transactionCategoryList}"
+                                        th:value="${transactionCategory.transactionCategoryId}"
+                                        th:text="${transactionCategory.transactionCategoryName}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{button.cancel}"></button>
+                    <button type="submit" class="btn btn-primary" th:text="#{button.submit}"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

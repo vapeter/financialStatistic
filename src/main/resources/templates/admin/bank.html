@@ -1,0 +1,37 @@
+<div class="col-6 d-inline" th:fragment="bank">
+    <div>
+        <h4 class="d-inline" th:text="#{admin.banks}"></h4>
+        <button class="btn btn-primary d-inline float-end" data-toggle="modal" data-target="#newBankModal" type="button"
+                th:text="#{admin.newBank}">
+        </button>
+    </div>
+
+
+    <table class="table table-borderless">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Bank</th>
+            <th scope="col"></th>
+        </tr>
+        <th:block th:each="bank : ${bankList}">
+            <tr>
+                <td th:text="${bank.bankId}"></td>
+                <td th:text="${bank.bankName}"></td>
+                <td>
+                    <button class="btn btn-info"
+                            data-toggle="modal"
+                            data-target="#editBankModal"
+                            type="button" th:attrappend="data-target=${bank.bankId}">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </td>
+                <!--                Edit Bank modal-->
+                <div th:replace="admin/editBank :: editBank"></div>
+            </tr>
+        </th:block>
+    </table>
+
+    <!--    Save bank modal-->
+    <div th:replace="admin/newBank :: newBank">...</div>
+
+</div>

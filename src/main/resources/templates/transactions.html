@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/mdb.min.js}" th:inline="javascript"></script>
+
+    <link th:rel="stylesheet" th:href="@{/icons/bootstrap-icons.css}">
+    <link th:rel="stylesheet" th:href="@{/css/mdb.min.css}">
+</head>
+<body>
+
+<!--menu-->
+    <div th:replace="menu :: menu">...</div>
+
+    <div class="container">
+        <div>
+            <h4 class="d-inline" th:text="#{transactions.header}"></h4>
+            <div class="d-inline float-end">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#newTransactionModal" type="button"
+                        th:text="#{transactions.new.transaction}">
+                </button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#importTransactionModal" type="button"
+                        th:text="#{transactions.importFromFile}">
+                </button>
+            </div>
+        </div>
+        <div th:if="${message}">
+            <br>
+            <h5 th:text="${message}"/></h5>
+        </div>
+        <p class="alert alert-danger" th:if="${error != null}" th:text="${error}"></p>
+        <br>
+
+        <div class="table-responsive-sm">
+            <table class="table table-borderless">
+                <tr>
+                    <th scope="col" th:text="#{transaction.date}"></th>
+                    <th scope="col" th:text="#{transaction.amount}"></th>
+                    <th scope="col" th:text="#{transaction.announcement}"></th>
+                    <th scope="col" th:text="#{transaction.partner.name}"></th>
+                    <th scope="col" th:text="#{transaction.category}"></th>
+                </tr>
+                <th:block th:each="transaction : ${transactionList}">
+                    <tr>
+                        <td th:text="${transaction.transactionDate}"></td>
+                        <td th:text="${transaction.amount + ' ' + transaction.currency}"></td>
+                        <td th:text="${transaction.announcement}"></td>
+                        <td th:text="${transaction.partnerName}"></td>
+                        <td th:text="${transaction.transactionCategory.transactionCategoryName}"></td>
+                        <td>
+                            <button class="btn btn-info"
+                                    data-toggle="modal"
+                                    data-target="#editTransactionModal"
+                                    type="button" th:attrappend="data-target=${transaction.transactionId}">
+                                <span class="bi bi-pencil"></span>
+                            </button>
+                            <form class="form-inline" th:action="@{'/deleteTransaction/' + ${transaction.transactionId}}" method="post">
+                                <button class="btn btn-danger" type="submit">
+                                    <span class="bi bi-trash"></span>
+                                </button>
+                            </form>
+
+                        </td>
+                        <!--                Edit transaction modal-->
+                        <div th:replace="transaction/editTransaction :: editTransaction"></div>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+
+        <!--    New transaction modal-->
+        <div th:replace="transaction/newTransaction :: newTransaction">...</div>
+        <div th:replace="transaction/importTransaction :: importTransaction">...</div>
+    </div>
+
+</body>
+<!--<div th:replace="footer :: footer">...</div>-->
+</html>

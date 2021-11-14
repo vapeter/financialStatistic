@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!--    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />-->
+    <!--    <link rel="stylesheet" th:href="@{/css/style.css}" />-->
+
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/chartjs/2.9.4/Chart.js}"></script>
+    <script th:src="@{/js/statistic.js}" th:inline="javascript"></script>
+    <script th:src="@{/js/mdb.min.js}" th:inline="javascript"></script>
+
+
+    <link th:rel="stylesheet" th:href="@{/css/mdb.min.css}">
+    <link th:rel="stylesheet" th:href="@{/icons/bootstrap-icons.css}">
+
+</head>
+<body>
+
+<!--menu-->
+    <div th:replace="menu :: menu">...</div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-4">
+                <p th:text="#{statistic.filter}"></p>
+                </hr>
+                <div>
+                    <label for="year" th:text="#{statistic.year}"></label>
+                    <select id="year" name="year" class="form-control">
+                        <option value="--" th:text="#{statistic.all.year}"></option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="month" th:text="#{statistic.month}"></label>
+                    <select id="month" name="month" class="form-control">
+                        <option value="--" th:text="#{statistic.all.month}"></option>
+                        <option value="00" th:text="#{statistic.january}"></option>
+                        <option value="01" th:text="#{statistic.february}"></option>
+                        <option value="02" th:text="#{statistic.march}"></option>
+                        <option value="03" th:text="#{statistic.april}"></option>
+                        <option value="04" th:text="#{statistic.may}"></option>
+                        <option value="05" th:text="#{statistic.june}"></option>
+                        <option value="06" th:text="#{statistic.july}"></option>
+                        <option value="07" th:text="#{statistic.august}"></option>
+                        <option value="08" th:text="#{statistic.september}"></option>
+                        <option value="09" th:text="#{statistic.october}"></option>
+                        <option value="10" th:text="#{statistic.november}"></option>
+                        <option value="11" th:text="#{statistic.december}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label for="bank">Bank</label>
+                    <select id="bank" name="bank" class="form-control">
+                        <option value="--" th:text="#{statistic.all.bank}"></option>
+                        <option th:each="bank : ${bankList}"
+                                th:value="${bank.bankId}"
+                                th:text="${bank.bankName}">
+                        </option>
+                    </select>
+                </div>
+                <div>
+                    <label for="bankAccount" th:text="#{statistic.bankAccount}"></label>
+                    <select id="bankAccount" name="bankAccount" class="form-control">
+                        <option value="--" th:text="#{statistic.all.bankAccount}"></option>
+                        <option th:each="bankAccount : ${bankAccountList}"
+                                th:value="${bankAccount.bankAccountId}"
+                                th:text="${bankAccount.bankAccountNumber}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+<!--<div th:replace="footer :: footer">...</div>-->
+</html>

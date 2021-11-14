@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/js/mdb.min.js}"></script>
+    <link th:rel="stylesheet" th:href="@{/icons/bootstrap-icons.css}">
+    <link th:rel="stylesheet" th:href="@{/css/mdb.min.css}">
+
+</head>
+<body>
+<!--menu-->
+<div th:replace="menu :: menu">...</div>
+<div class="container">
+    <div class="row">
+        <p class="lead text-center" th:text="#{home.description}"></p>
+        <p class="lead text-center" th:text="#{home.details}"></p>
+        <p class="lead text-center" th:text="#{home.details2}"></p>
+    </div>
+</div>
+
+
+</body>
+<!--<div th:replace="footer :: footer">...</div>-->
+</html>

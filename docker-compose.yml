@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  
+  financialstat_db:
+    image: mysql:8.0.23
+    container_name: financialstat_db
+    networks:
+      - financialstat-network
+    volumes:             
+    - ./databases:/docker-entrypoint-initdb.d
+    ports:
+      - "12546:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: MysqlRootPass
+    restart: always
+  
+    
+  financialstat_keycloak:
+    image: jboss/keycloak:11.0.2
+    container_name: financialstat_keycloak
+    networks:
+      - financialstat-network
+    environment:
+      DB_VENDOR: mysql
+      DB_ADDR: financialstat_db
+      DB_USER: keycloak
+      DB_PASSWORD: KeycloakAdmin
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: KeycloakAdmin
+      KEYCLOAK_IMPORT: /tmp/financialstat-realm.json
+    volumes:
+      - ./keycloak/financialstat-realm.json:/tmp/financialstat-realm.json
+    ports:
+      - "8080:8080"
+    depends_on:
+      - financialstat_db
+    restart: always
+    
+  financial_stat:
+    build: .
+    container_name: financial_statistic_release
+    networks:
+      - financialstat-network
+    ports:
+      - "8500:8500"
+    depends_on:
+      - financialstat_keycloak
+      - financialstat_db
+    restart: always
+    
+    
+networks:
+  financialstat-network:
+    external: true 
